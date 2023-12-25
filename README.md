@@ -2,9 +2,9 @@
 
 ## Admin Dashboard
 ``
-An Application for Studio Administration
-</br>
-Created by Insomnia Dev 👨🏻‍💻
+An Application for Studio Administration``
+<br/>
+``Created by Insomnia Dev 👨🏻‍💻
 ``
 
 ## 🗼 Key Feature
