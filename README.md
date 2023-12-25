@@ -3,8 +3,7 @@
 ## Admin Dashboard
 ``
 An Application for Studio Administration
-``
-``
+</br>
 Created by Insomnia Dev 👨🏻‍💻
 ``
 
