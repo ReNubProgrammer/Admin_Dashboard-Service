@@ -8,11 +8,10 @@ An Application for Studio Administration``
 ``
 
 ## 🗼 Key Feature
-* [ ] Client On-Site Register
-* [ ] Order List and Management
-* [ ] Cashflow Management
-* [ ] Freelance Details and Assignment
-* [ ] Agenda
+* [ ] Data Order Handler
+* [ ] Data Freelance and Assignment Handler
+* [ ] Cashflow Services
+* [ ] Agenda Services
 
 ## 🛰️ Backend Side
 * Nest js
