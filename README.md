@@ -4,7 +4,7 @@
 ``
 An Application for Studio Administration``
 <br/>
-``Created by Insomnia Dev 👨🏻‍💻
+``Created by ReNubProgrammer 👨🏻‍💻
 ``
 
 ## 🗼 Key Feature
