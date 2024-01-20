@@ -8,6 +8,7 @@ An Application for Studio Administration``
 ``
 
 ## 🗼 Key Feature
+* [x] Product and Package Handler
 * [ ] Data Order Handler
 * [ ] Data Freelance and Assignment Handler
 * [ ] Cashflow Services
@@ -21,3 +22,7 @@ An Application for Studio Administration``
 ## 💻 Version Update and Details
 #### 0.1.0
 > * Installing Nestjs for Nodejs Framework
+
+#### 0.1.1
+> * Installing TypeORM for database query
+> * Make API for Product and Packages
