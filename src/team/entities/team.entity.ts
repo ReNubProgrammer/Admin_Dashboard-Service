@@ -25,11 +25,11 @@ export class Team {
     @Column()
     nobank:number;
 
-    @OneToMany(() => Order, fgorders => fgorders.fg)
-    fgorders: Order[];
+    // @OneToMany(() => Order, fgorders => fgorders.fg)
+    // fgorders: Order[];
 
-    @OneToMany(() => Order, fgorders => fgorders.vg)
-    vgorders: Order[];
+    // @OneToMany(() => Order, fgorders => fgorders.vg)
+    // vgorders: Order[];
 
     constructor(item:Partial<Team>){
         Object.assign(this, item);

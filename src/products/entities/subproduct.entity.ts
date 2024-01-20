@@ -1,15 +1,17 @@
-import { Column, Entity, ManyToOne} from "typeorm";
+import { Column, Entity, Generated, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn} from "typeorm";
 import { Product } from "./product.entity";
-import { GlobalEntityId } from "src/db/globalid.entity";
 
 @Entity()
-export class Packages extends GlobalEntityId<Packages> {
+export class Packages {
+    @PrimaryGeneratedColumn()
+    id: number;
+
     @Column ()
     name:string;
 
     @Column()
     price: number;
 
-    @ManyToOne(()=> Product, packageName => packageName.packages)
-    packageName: Product;
+    @ManyToOne(()=> Product, product => product.packages,{onDelete:'CASCADE'})
+    product: Product;
 }

@@ -40,13 +40,13 @@ export class Order {
     // @JoinColumn({name:"product_name",referencedColumnName: 'name'})
     // products: Product;
 
-    @ManyToOne(() => Team, fg => fg.fgorders)
-    @JoinColumn({name:"fg_initial",referencedColumnName: 'initial'})
-    fg: Team;
+    // @ManyToOne(() => Team, fg => fg.fgorders)
+    // @JoinColumn({name:"fg_initial",referencedColumnName: 'initial'})
+    // fg: Team;
 
-    @ManyToOne(() => Team, fg => fg.fgorders)
-    @JoinColumn({name:"vg_initial",referencedColumnName: 'initial'})
-    vg: Team;
+    // @ManyToOne(() => Team, fg => fg.fgorders)
+    // @JoinColumn({name:"vg_initial",referencedColumnName: 'initial'})
+    // vg: Team;
 
     constructor(item:Partial<Order>){
         Object.assign(this, item);

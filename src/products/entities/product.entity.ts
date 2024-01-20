@@ -8,7 +8,7 @@ export class Product extends GlobalEntity<Product> {
     @Column ({unique:true})
     name:string;
 
-    @OneToMany(() => Packages, packages => packages.packageName, {cascade: true})
+    @OneToMany(() => Packages, packages => packages.product, {cascade: true, onDelete:'CASCADE'})
     packages: Packages[]
 
     // @OneToMany(() => Order, orders => orders.products)
