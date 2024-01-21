@@ -2,8 +2,7 @@ export class CreateTeamDto {
     initial:string;
     name:string;
     regional:string;
-    nomor:number;
+    nomor:string;
     bank: string;
-    nobank:number;
-    orders: string;
+    nobank:string;
 }

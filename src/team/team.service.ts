@@ -1,26 +1,68 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateTeamDto } from './dto/create-team.dto';
 import { UpdateTeamDto } from './dto/update-team.dto';
+import { Team } from './entities/team.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { EntityManager, Repository } from 'typeorm';
 
 @Injectable()
 export class TeamService {
-  create(createTeamDto: CreateTeamDto) {
-    return 'This action adds a new team';
+  constructor(
+    @InjectRepository(Team)
+    private readonly teamRepo: Repository<Team>,
+  ) { }
+  
+  async uniqueCheck(id: string){
+    const member = await this.teamRepo.findOne({
+      where: { id }
+    })
+    return member.id;
   }
 
-  findAll() {
-    return `This action returns all team`;
+  async createMember(createMemberDto: CreateTeamDto) {
+    const newMember = new Team({
+      ...createMemberDto
+    });
+    const existMember = await this.teamRepo.findOne({
+      where: { name: newMember.name }
+    })
+    if (existMember) {
+      throw new ConflictException('Member has already registered')
+    }
+    await this.teamRepo.save(newMember);
+    return 'Member created';
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} team`;
+  async findAll() {
+    const findAllMember = await this.teamRepo.find()
+    return findAllMember;
   }
 
-  update(id: number, updateTeamDto: UpdateTeamDto) {
-    return `This action updates a #${id} team`;
+  async findMember(id: string | undefined) {
+    const member = await this.teamRepo.findOne({
+      where: { id }
+    })
+    if (!member) {
+      throw new NotFoundException(`Member ${member.name} not found`)
+    }
+    return member;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} team`;
+  async updateMemberDetails(id: string, updateTeamDto: UpdateTeamDto) {
+    const member = await this.findMember(id);
+
+    if(member){
+      Object.assign(member, updateTeamDto);
+      await this.teamRepo.save(member);
+    } else {
+      throw new NotFoundException(`User ${member.name} not found`)
+    }
+    return `User ${member.name} updated`
+  }
+
+  async removeMember(id: string) {
+    const member = await this.findMember(id)
+    return `Member ${member.name} removed from team` 
+      + await this.teamRepo.delete(id);
   }
 }

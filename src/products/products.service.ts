@@ -54,7 +54,7 @@ export class ProductsService {
   }
 
   async updateProduct(id: string, updateProductDto: UpdateProductDto) {
-    const productProp = await this.productsRepo.findOneBy({id});
+    const productProp = await this.findProductById(id);
     productProp.name = updateProductDto.name;
     await this.entityManager.save(productProp);
   }
