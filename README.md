@@ -24,5 +24,8 @@ An Application for Studio Administration``
 > * Installing Nestjs for Nodejs Framework
 
 #### 0.1.1
-> * Installing TypeORM for database query
-> * Make API for Product and Packages
+> * Installed TypeORM for database query
+> * Installed API for Product and Packages
+
+#### 0.1.2
+> * Installed API for Team

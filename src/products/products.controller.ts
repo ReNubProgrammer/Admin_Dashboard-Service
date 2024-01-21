@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, Res, Put, NotFoundException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, Res, Put, NotFoundException, ParseUUIDPipe } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
@@ -20,18 +20,18 @@ export class ProductsController {
   }
 
   @Get('view/:productId')
-  async findOneBy(@Param('productId') productId: string) {
+  async findOneBy(@Param('productId', ParseUUIDPipe) productId: string) {
     return this.productsService.findProductById(productId);
   }
 
   @Patch('update/:productId')
-  async update(@Param('productId') productId: string, @Body() updateProductDto: UpdateProductDto) {
+  async update(@Param('productId', ParseUUIDPipe) productId: string, @Body() updateProductDto: UpdateProductDto) {
     return this.productsService.updateProduct(productId, updateProductDto);
   }
 
   @Post('view/:productId/package')
   async addPackagetoProduct(
-    @Param('productId') productId: string,
+    @Param('productId', ParseUUIDPipe) productId: string,
     @Body() packageData: CreatePackageDto
   ){
     try {
@@ -48,7 +48,7 @@ export class ProductsController {
 
   @Patch('edit/:productId/:packageId')
   async updatePackage(
-    @Param('productId') productId: string,
+    @Param('productId', ParseUUIDPipe) productId: string,
     @Param('packageId') packageId:number,
     @Body() updatedData: Partial<Packages>
   ){
@@ -65,7 +65,7 @@ export class ProductsController {
   }
 
   @Delete('drop/:productId')
-  async removeProduct(@Param('productId') productId: string) {
+  async removeProduct(@Param('productId', ParseUUIDPipe) productId: string) {
     return this.productsService.removeProduct(productId);
   }
 

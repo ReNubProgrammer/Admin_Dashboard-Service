@@ -1,37 +1,30 @@
+import { GlobalEntity } from "src/db/global.entity";
 import { Order } from "src/orders/entities/order.entity";
-import { Column, Entity, Generated, JoinColumn, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne} from "typeorm";
 
 @Entity()
-export class Team {
-    @Column()
-    @Generated('uuid')
-    id:number;
-
-    @PrimaryColumn({length:"3"})
+export class Team extends GlobalEntity<Team> {
+    @Column({length:"3", unique: true})
     initial:string;
 
-    @Column({length:"25"})
+    @Column({length:"25", unique: true})
     name:string;
 
     @Column("varchar", {length: "30"})
     regional:string;
 
     @Column()
-    nomor:number;
+    nomor:string;
 
     @Column()
     bank:string;
 
     @Column()
-    nobank:number;
+    nobank:string;
 
     // @OneToMany(() => Order, fgorders => fgorders.fg)
     // fgorders: Order[];
 
     // @OneToMany(() => Order, fgorders => fgorders.vg)
     // vgorders: Order[];
-
-    constructor(item:Partial<Team>){
-        Object.assign(this, item);
-    }
 }

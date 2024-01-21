@@ -9,12 +9,13 @@ import { AdminsModule } from './admins/admins.module';
 import { ProductsModule } from './products/products.module';
 import { OrdersModule } from './orders/orders.module';
 import { TeamModule } from './team/team.module';
+import { IsUniqueConstraint } from './validation/isunique.constraint';
 
 @Module({
   imports: [ConfigModule.forRoot({
     isGlobal:true
   }),SqlModule, AuthModule, AdminsModule, ProductsModule, OrdersModule, TeamModule],
   controllers: [AppController, AuthController],
-  providers: [AppService],
+  providers: [AppService, IsUniqueConstraint],
 })
 export class AppModule { }
