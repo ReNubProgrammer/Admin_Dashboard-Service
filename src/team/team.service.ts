@@ -3,7 +3,7 @@ import { CreateTeamDto } from './dto/create-team.dto';
 import { UpdateTeamDto } from './dto/update-team.dto';
 import { Team } from './entities/team.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { EntityManager, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class TeamService {
@@ -40,7 +40,11 @@ export class TeamService {
 
   async findMember(id: string | undefined) {
     const member = await this.teamRepo.findOne({
-      where: { id }
+      where: { id },
+      relations: {
+        order_fg: true,
+        order_vg: true
+      }
     })
     if (!member) {
       throw new NotFoundException(`Member ${member.name} not found`)

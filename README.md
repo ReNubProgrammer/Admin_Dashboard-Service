@@ -20,12 +20,16 @@ An Application for Studio Administration``
 
 
 ## 💻 Version Update and Details
-#### 0.1.0
-> * Installing Nestjs for Nodejs Framework
-
 #### 0.1.1
-> * Installed TypeORM for database query
-> * Installed API for Product and Packages
+   * Installed TypeORM for database query
+   * Configure API for Product and Packages
+   * Upgrade API Product and Package for Relations each other
 
 #### 0.1.2
-> * Installed API for Team
+   * Configure API for Team
+   * Upgrade Tean API for Relations
+
+#### 0.1.3
+   * Installed API for Order
+   * Add relation within Product and Order
+   * Try make relation for Order with Team

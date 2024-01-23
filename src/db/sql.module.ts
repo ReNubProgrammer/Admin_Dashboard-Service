@@ -13,7 +13,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         username: configService.get('MY_USER'),
         password: configService.get('MY_PASS'),
         database: configService.get('MY_SCHEMA'),
-        entities: [],
+        entities: [__dirname + '/../**/*.entity.ts'],
         synchronize: configService.get('MY_SYNC'),
         autoLoadEntities: true
       }),

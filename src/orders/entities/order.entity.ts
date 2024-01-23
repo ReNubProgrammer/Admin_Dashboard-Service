@@ -1,54 +1,40 @@
+import { GlobalEntity } from "src/db/global.entity";
 import { Product } from "src/products/entities/product.entity";
 import { Team } from "src/team/entities/team.entity";
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-
-export enum Gender {
-    male = "male",
-    female = "female"
-}
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class Order {
-    @PrimaryGeneratedColumn('uuid')
-    id:number;
-
+export class Order extends GlobalEntity<Order> {
     @Column("date")
-    date:number;
-
-    @Column({length: "10"})
-    customer_name:string;
+    date: number;
 
     @Column()
-    email:string;
 
-    @Column("enum", {enum: Gender})
-    gender:Gender;
+    @Column({ length: "10" })
+    customer_name: string;
+
+    @Column()
+    email: string;
+
+    @Column({ length: "6" })
+    gender: string;
 
     @Column("time")
-    time:number;
+    time: number;
 
-    @Column({name: "product_name"})
-    productsName:string;
+    @ManyToOne(() => Product, product => product.orders, 
+    { cascade: ['insert', 'update'], onDelete: 'CASCADE' })
+    product: Product
 
-    @Column({name: "fg_initial"})
-    fg_initial:string;
+    @ManyToMany(() => Team, team => team.order_fg)
+    @JoinTable({
+        name: 'orderfg_team',
+    })
+    fg_initials: Team[];
 
-    @Column({name: "vg_initial"})
-    vg_initial:string;
-
-    // @ManyToOne(() => Product, products => products.orders)
-    // @JoinColumn({name:"product_name",referencedColumnName: 'name'})
-    // products: Product;
-
-    // @ManyToOne(() => Team, fg => fg.fgorders)
-    // @JoinColumn({name:"fg_initial",referencedColumnName: 'initial'})
-    // fg: Team;
-
-    // @ManyToOne(() => Team, fg => fg.fgorders)
-    // @JoinColumn({name:"vg_initial",referencedColumnName: 'initial'})
-    // vg: Team;
-
-    constructor(item:Partial<Order>){
-        Object.assign(this, item);
-    }
+    @ManyToMany(() => Team, team => team.order_vg)
+    @JoinTable({
+        name: 'ordervg_team',
+    })
+    vg_initials: Team[];
 }

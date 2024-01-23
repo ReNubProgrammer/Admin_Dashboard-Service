@@ -11,6 +11,6 @@ export class Product extends GlobalEntity<Product> {
     @OneToMany(() => Packages, packages => packages.product, {cascade: true, onDelete:'CASCADE'})
     packages: Packages[]
 
-    // @OneToMany(() => Order, orders => orders.products)
-    // orders: Order[];
+    @OneToMany(() => Order, orders => orders.product, {cascade: true, onDelete:'CASCADE'})
+    orders: Order[];
 }

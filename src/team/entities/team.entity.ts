@@ -1,6 +1,6 @@
 import { GlobalEntity } from "src/db/global.entity";
 import { Order } from "src/orders/entities/order.entity";
-import { Column, Entity, JoinColumn, ManyToOne} from "typeorm";
+import { Column, Entity, ManyToMany} from "typeorm";
 
 @Entity()
 export class Team extends GlobalEntity<Team> {
@@ -22,9 +22,9 @@ export class Team extends GlobalEntity<Team> {
     @Column()
     nobank:string;
 
-    // @OneToMany(() => Order, fgorders => fgorders.fg)
-    // fgorders: Order[];
+    @ManyToMany(() => Order, order => order.fg_initials, {cascade: true, onDelete:'CASCADE'})
+    order_fg: Order[];
 
-    // @OneToMany(() => Order, fgorders => fgorders.vg)
-    // vgorders: Order[];
+    @ManyToMany(() => Order, order => order.vg_initials, {cascade:true, onDelete:'CASCADE'})
+    order_vg: Order[];
 }

@@ -1,7 +1,7 @@
 import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { EntityManager, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { Product } from './entities/product.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Packages } from './entities/subproduct.entity';
@@ -14,7 +14,6 @@ export class ProductsService {
     private readonly productsRepo: Repository<Product>,
     @InjectRepository(Packages)
     private readonly packageRepo: Repository<Packages>,
-    private readonly entityManager: EntityManager
   ){}
 
   async createProduct(createProductDto: CreateProductDto) {
@@ -32,7 +31,7 @@ export class ProductsService {
     if (existProduct){
       throw new ConflictException('Product has already registered')
     }
-    await this.entityManager.save(product);
+    await this.productsRepo.save(product);
   }
 
   async findAllProduct() {
@@ -56,21 +55,21 @@ export class ProductsService {
   async updateProduct(id: string, updateProductDto: UpdateProductDto) {
     const productProp = await this.findProductById(id);
     productProp.name = updateProductDto.name;
-    await this.entityManager.save(productProp);
+    await this.productsRepo.save(productProp);
   }
 
   async addPackagetoProduct(id:string, packageData: CreatePackageDto){
+   try {
     const product = await this.findProductById(id);
-    if (!product){
-      throw new NotFoundException(`Product not found`)
-    }
-
-    const newPackage = this.packageRepo.create({
+    const newPackage = await this.packageRepo.save({
       ...packageData,
       product:product
     })
 
     return this.packageRepo.save(newPackage);
+   } catch (error) {
+    throw new NotFoundException(`Product not found`)
+   } 
   }
 
   async updatePackage(id:string, packageId:number, updatePackage: Partial<Packages>) {
