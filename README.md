@@ -33,3 +33,6 @@ An Application for Studio Administration``
    * Installed API for Order
    * Add relation within Product and Order
    * Try make relation for Order with Team
+
+#### 0.1.4
+   * Fix bug when creating new package for a product
