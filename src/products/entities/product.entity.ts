@@ -6,7 +6,7 @@ import { Packages } from "./subproduct.entity";
 @Entity()
 export class Product extends GlobalEntity<Product> {
     @Column ({unique:true})
-    name:string;
+    productName:string;
 
     @OneToMany(() => Packages, packages => packages.product, {cascade: true, onDelete:'CASCADE'})
     packages: Packages[]

@@ -12,7 +12,6 @@ export class Packages {
     @Column()
     price: string;
 
-    @ManyToOne(() => Product, product => product.packages, 
-    { cascade: ['insert', 'update'], onDelete: 'CASCADE' })
+    @ManyToOne(() => Product, product => product.packages, { onDelete: 'CASCADE' })
     product: Product;
 }

@@ -8,8 +8,6 @@ export class Order extends GlobalEntity<Order> {
     @Column("date")
     date: number;
 
-    @Column()
-
     @Column({ length: "10" })
     customer_name: string;
 
@@ -19,11 +17,14 @@ export class Order extends GlobalEntity<Order> {
     @Column({ length: "6" })
     gender: string;
 
-    @Column("time")
-    time: number;
+    @Column("")
+    book_time: string;
 
-    @ManyToOne(() => Product, product => product.orders, 
-    { cascade: ['insert', 'update'], onDelete: 'CASCADE' })
+    @Column()
+    status: string;
+
+    @ManyToOne(() => Product, product => product.orders,
+        { cascade: ['insert', 'update'], onDelete: 'CASCADE' })
     product: Product
 
     @ManyToMany(() => Team, team => team.order_fg)

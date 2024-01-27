@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AppService {
-  checkServer(): string {
-    return 'Server Connected';
+  checkService(): string {
+    return 'Connected to Service';
   }
 }

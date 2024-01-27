@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Order } from './entities/order.entity';
 import { Repository } from 'typeorm';
 import { Team } from 'src/team/entities/team.entity';
+import { Product } from 'src/products/entities/product.entity';
 
 @Injectable()
 export class OrdersService {
@@ -12,12 +13,19 @@ export class OrdersService {
     @InjectRepository(Order)
     private readonly orderRepo: Repository<Order>,
     @InjectRepository(Team)
-    private readonly teamRepo: Repository<Team>
+    private readonly teamRepo: Repository<Team>,
+    @InjectRepository(Product)
+    private readonly prodRepo: Repository<Product>
   ) { }
 
   async createNewOrder(createOrderDto: CreateOrderDto) {
+    const prodName = createOrderDto.productName
+    const product = await this.prodRepo.findOne({
+      where: {productName: prodName}
+    })
     const order = new Order({
       ...createOrderDto,
+      product: product,
       fg_initials: [],
       vg_initials: []
     })
@@ -34,6 +42,7 @@ export class OrdersService {
     const order = await this.orderRepo.findOne({
       where: { id },
       relations: {
+        product:true,
         fg_initials: true,
         vg_initials: true
       }
@@ -41,15 +50,28 @@ export class OrdersService {
     return order;
   }
 
-  findAllOrder() {
-    return `This action returns all orders`;
+  async findAllOrder() {
+    return this.orderRepo.find({
+      relations:{
+        product:true,
+        fg_initials: true,
+        vg_initials: true
+      }
+    });
   }
 
-  updateOrder(id: number, updateOrderDto: UpdateOrderDto) {
-    return `This action updates a #${id} order`;
+  async updateOrder(id: string, updateOrderDto: UpdateOrderDto) {
+    const orderProp = await this.findOrder(id);
+    try {
+        Object.assign(orderProp, updateOrderDto);
+        await this.orderRepo.save(orderProp);
+        return `Order ${orderProp.product} Updated!`;
+    } catch (error) {
+      throw new NotFoundException(`Order not found`)
+    }
   }
 
-  removeOrder(id: number) {
-    return `This action removes a #${id} order`;
+  async removeOrder(id: string) {
+    await this.orderRepo.delete(id);
   }
 } 

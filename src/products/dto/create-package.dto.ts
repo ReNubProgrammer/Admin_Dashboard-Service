@@ -1,4 +1,4 @@
 export class CreatePackageDto{
     name: string;
-    price: string;
+    price: string; 
 }

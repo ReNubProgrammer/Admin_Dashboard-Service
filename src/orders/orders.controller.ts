@@ -7,12 +7,12 @@ import { UpdateOrderDto } from './dto/update-order.dto';
 export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {}
 
-  @Post()
+  @Post('/new')
   create(@Body() createOrderDto: CreateOrderDto) {
     return this.ordersService.createNewOrder(createOrderDto);
   }
 
-  @Get()
+  @Get('/all')
   findAll() {
     return this.ordersService.findAllOrder();
   }
@@ -24,11 +24,11 @@ export class OrdersController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateOrderDto: UpdateOrderDto) {
-    return this.ordersService.updateOrder(+id, updateOrderDto);
+    return this.ordersService.updateOrder(id, updateOrderDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.ordersService.removeOrder(+id);
+    return this.ordersService.removeOrder(id);
   }
 }

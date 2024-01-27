@@ -1,3 +1,5 @@
+import { CreatePackageDto } from "./create-package.dto";
+
 export class CreateProductDto {
-    name: string;
+    productName: string;
 }

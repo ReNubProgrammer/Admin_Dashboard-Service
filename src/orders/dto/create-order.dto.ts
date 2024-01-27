@@ -3,8 +3,9 @@ export class CreateOrderDto {
     customer_name: string;
     email: string;
     gender: string;
-    time: number;
-    productsName: string;
+    time: string;
+    productName: string;
+    status:string;
     fg_initial: string[];
     vg_initial: string[];
 }
