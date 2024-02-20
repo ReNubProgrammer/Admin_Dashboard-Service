@@ -3,7 +3,7 @@ import { Product } from "./product.entity";
 
 @Entity()
 export class Packages {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn() 
     id: number;
 
     @Column()
@@ -12,6 +12,6 @@ export class Packages {
     @Column()
     price: string;
 
-    @ManyToOne(() => Product, product => product.packages, { onDelete: 'CASCADE' })
+    @ManyToOne(() => Product, product => product.packages, {onDelete:'CASCADE'})
     product: Product;
 }

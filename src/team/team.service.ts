@@ -22,7 +22,7 @@ export class TeamService {
   async createMember(createMemberDto: CreateTeamDto) {
     const newMember = new Team({
       ...createMemberDto
-    });
+    })
     const existMember = await this.teamRepo.findOne({
       where: { name: newMember.name }
     })

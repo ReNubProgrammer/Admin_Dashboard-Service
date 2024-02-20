@@ -54,7 +54,7 @@ export class ProductsService {
 
   async findAllProduct() {
     return this.productsRepo.find({
-      relations: { packages: true }
+      relations:{packages: true}
     });
   }
 
@@ -74,7 +74,7 @@ export class ProductsService {
 
   async updateProduct(id: string, updateProductDto: UpdateProductDto) {
     const productProp = await this.findProductById(id);
-    productProp.productName = updateProductDto.name;
+    productProp.productName = updateProductDto.productName;
     await this.productsRepo.save(productProp);
   }
 

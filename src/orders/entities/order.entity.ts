@@ -1,10 +1,17 @@
 import { GlobalEntity } from "src/db/global.entity";
 import { Product } from "src/products/entities/product.entity";
 import { Team } from "src/team/entities/team.entity";
-import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, ManyToOne, UpdateDateColumn } from "typeorm";
+import { Months } from "../../db/month.entity";
 
 @Entity()
 export class Order extends GlobalEntity<Order> {
+    @CreateDateColumn()
+    createdat: number;
+
+    @UpdateDateColumn()
+    lastupdate: number;
+
     @Column("date")
     date: number;
 
@@ -17,7 +24,7 @@ export class Order extends GlobalEntity<Order> {
     @Column({ length: "6" })
     gender: string;
 
-    @Column("")
+    @Column()
     book_time: string;
 
     @Column()
@@ -26,6 +33,9 @@ export class Order extends GlobalEntity<Order> {
     @ManyToOne(() => Product, product => product.orders,
         { cascade: ['insert', 'update'], onDelete: 'CASCADE' })
     product: Product
+
+    @ManyToOne(()=> Months, month => month.orders)
+    month: Months
 
     @ManyToMany(() => Team, team => team.order_fg)
     @JoinTable({
@@ -38,4 +48,5 @@ export class Order extends GlobalEntity<Order> {
         name: 'ordervg_team',
     })
     vg_initials: Team[];
+
 }

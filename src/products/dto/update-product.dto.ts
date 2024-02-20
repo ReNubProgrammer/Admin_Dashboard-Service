@@ -11,7 +11,7 @@ export class UpdateProductDto extends PartialType(CreateProductDto) {
         table: 'product',
         column:'name'
     },{message:'Packages already exist. Try another.'})
-    name: string;
+    productName: string;
 
     packages:CreatePackageDto[];
 }
