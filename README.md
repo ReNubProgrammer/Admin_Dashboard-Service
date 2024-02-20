@@ -36,3 +36,8 @@ An Application for Studio Administration``
 
 #### 0.1.4
    * Fix bug when creating new package for a product
+
+#### 0.2.0
+   * Fix bug update product
+   * Fix bug order entity
+   * Add payment transaction services
