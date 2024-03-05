@@ -1,8 +1,8 @@
-import { GlobalEntity } from "src/db/global.entity";
+import { GlobalEntity } from "src/_db/global.entity";
 import { Product } from "src/products/entities/product.entity";
 import { Team } from "src/team/entities/team.entity";
 import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, ManyToOne, UpdateDateColumn } from "typeorm";
-import { Months } from "../../db/month.entity";
+import { Months } from "../../_db/month.entity";
 
 @Entity()
 export class Order extends GlobalEntity<Order> {

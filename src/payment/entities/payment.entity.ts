@@ -1,5 +1,6 @@
-import { GlobalEntity } from "src/db/global.entity";
-import { Column, CreateDateColumn, Entity, Generated, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { IsDate } from "class-validator";
+import { GlobalEntity } from "src/_db/global.entity";
+import { Column, CreateDateColumn, Entity} from "typeorm";
 
 @Entity()
 export class Payment extends GlobalEntity<Payment> {
@@ -10,6 +11,7 @@ export class Payment extends GlobalEntity<Payment> {
     type: string;
 
     @Column()
+    @IsDate()
     date: string;
     
     @Column()

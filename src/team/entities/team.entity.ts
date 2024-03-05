@@ -1,4 +1,4 @@
-import { GlobalEntity } from "src/db/global.entity";
+import { GlobalEntity } from "src/_db/global.entity";
 import { Order } from "src/orders/entities/order.entity";
 import { Column, Entity, ManyToMany} from "typeorm";
 

@@ -45,3 +45,6 @@ An Application for Studio Administration``
 #### 0.2.5
    * Add ascending order for payment data
    * Fix bug query on data service and controller
+
+#### 0.3.0
+   * Add agenda services

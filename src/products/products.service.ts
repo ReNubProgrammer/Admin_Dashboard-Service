@@ -17,20 +17,23 @@ export class ProductsService {
   ) { }
 
   async createProduct(createProductDto: CreateProductDto) {
-    const product = new Product({
-      ...createProductDto,
-    });
+    try {
+      const product = new Product({
+        ...createProductDto,
+      });
 
-    const existProduct = await this.productsRepo.findOne({
-      where: [{
-        productName: product.productName
-      }],
-    })
-
-    if (existProduct) {
-      throw new ConflictException('Product has already registered')
+      const existProduct = await this.productsRepo.findOne({
+        where: [{
+          productName: product.productName
+        }],
+      })
+      if (existProduct) {
+        throw new ConflictException('Product has already registered')
+      }
+      await this.productsRepo.save(product);
+    } catch (error) {
+      return error;
     }
-    await this.productsRepo.save(product);
   }
 
   async addPackagetoProduct(id: string, packageData: CreatePackageDto) {
@@ -54,7 +57,7 @@ export class ProductsService {
 
   async findAllProduct() {
     return this.productsRepo.find({
-      relations:{packages: true}
+      relations: { packages: true }
     });
   }
 
@@ -73,9 +76,13 @@ export class ProductsService {
   }
 
   async updateProduct(id: string, updateProductDto: UpdateProductDto) {
-    const productProp = await this.findProductById(id);
-    productProp.productName = updateProductDto.productName;
-    await this.productsRepo.save(productProp);
+    try {
+      const productProp = await this.findProductById(id);
+      productProp.productName = updateProductDto.productName;
+      await this.productsRepo.save(productProp);
+    } catch (error) {
+      return error;
+    }
   }
 
   async updatePackage(id: string, packageId: number, updatePackage: Partial<Packages>) {
