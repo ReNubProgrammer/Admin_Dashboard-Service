@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { PaymentService } from './payment.service';
 import { CreatePaymentDto } from './dto/create-payment.dto';
 import { UpdatePaymentDto } from './dto/update-payment.dto';
+import { GetPaymentByDate } from './dto/get-payment-by-date.dto';
 
 @Controller('payment')
 export class PaymentController {
@@ -13,8 +14,14 @@ export class PaymentController {
   }
 
   @Get('all/:type')
-  findBy(@Param('type') type:string) {
-    return this.paymentService.findAllTransaction(type);
+  findBy(
+    @Param('type') type:string, 
+    @Query() query: GetPaymentByDate
+    ) {
+    return this.paymentService.findAllTransactionBy(
+      type, 
+      query
+    );
   }
 
   @Get('single/:id')

@@ -41,3 +41,7 @@ An Application for Studio Administration``
    * Fix bug update product
    * Fix bug order entity
    * Add payment transaction services
+
+#### 0.2.5
+   * Add ascending order for payment data
+   * Fix bug query on data service and controller

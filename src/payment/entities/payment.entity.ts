@@ -5,7 +5,7 @@ import { Column, CreateDateColumn, Entity, Generated, PrimaryColumn, PrimaryGene
 export class Payment extends GlobalEntity<Payment> {
     @CreateDateColumn()
     createdAt: string;
-    
+
     @Column()
     type: string;
 
